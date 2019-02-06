@@ -67,3 +67,60 @@ assert(cloned.classes !== obj1.classes, "array equlity failed")
 console.log(cloned.getAge() , obj1.getAge(), )
 
 
+
+
+
+/*
+function extend(from, to) {
+  if (from == null || typeof from != "object") return from;
+
+  if (from.constructor != Object && from.constructor != Array) return from;
+
+  if (from.constructor == Date || from.constructor == RegExp || from.constructor == Function ||
+    from.constructor == String || from.constructor == Number || from.constructor == Boolean)
+    return new from.constructor(from);
+
+  to = to || new from.constructor();
+
+  for (var name in from) {
+    to[name] = typeof to[name] == "undefined" ? extend(from[name], null) : to[name];
+  }
+
+  return to;
+}
+
+var obj = {
+  date: new Date(),
+  func: function(q) {
+    return 1 + q;
+  },
+  num: 123,
+  text: "asdasd",
+  array: [1, "asd"],
+  regex: new RegExp(/aaa/i),
+  subobj: {
+    num: 234,
+    text: "asdsaD"
+  }
+}
+
+var clone = extend(obj);
+
+/* log objects to DOM */
+var origNode = document.getElementById("orig");
+origNode.innerHTML = JSON.stringify(obj);
+
+var cloneNode = document.getElementById("clone")
+cloneNode.innerHTML = JSON.stringify(clone);
+
+
+//test dates
+setTimeout(function() {
+    obj.date = new Date();
+    origNode.innerHTML += "<br/>" + JSON.stringify(obj);
+    cloneNode.innerHTML += "<br/>" + JSON.stringify(clone);
+}, 1500)
+
+
+
+ */
