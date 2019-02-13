@@ -1,21 +1,100 @@
+// Inheritence 101
+/**
+ 1. PseudoClassical Inheritence
+ 2. prototype inheritence
+ 3. Functional Inheritence
 
-var assert = require('assert')
 
-function Person(){}
-Person.prototype.dance = function(){};
+ **/
 
-function Ninja(){}
+// 1. 1. PseudoClassical Inheritence
 
-// Achieve similar, but non-inheritable, results
-Ninja.prototype = Person.prototype;
-Ninja.prototype = { dance: Person.prototype.dance };
+function Animal(_name) {
+  this.name = "Default Animal";
+  
 
-assert( (new Ninja()) instanceof Person, "Will fail with bad prototype chain." );
+}
 
-// Only this maintains the prototype chain
-Ninja.prototype = new Person();
+Animal.prototype.canWalk = function () {
+  console.log(this.name, "can walk")
+}
 
-var ninja = new Ninja();
-assert( ninja instanceof Ninja, "ninja receives functionality from the Ninja prototype" );
-assert( ninja instanceof Person, "... and the Person prototype" );
-assert( ninja instanceof Object, "... and the Object prototype" );
+
+
+function Bird(_name) {
+}
+
+Bird.prototype = new Animal();
+
+Bird.prototype.canFly = function () {
+  console.log(this.name ," can definitely fly")
+
+}
+
+
+let bird1 = new Bird('Humming bird');
+
+bird1.canFly()
+bird1.canWalk()
+
+
+
+//2. Prototypal Inheritencemal
+
+
+let Animal = {
+  name : "Default Animal",
+  
+  canWalk : function () {
+      console.log(this.name, "can walk")
+  }
+
+}
+
+let bird = Object.create(Animal);
+bird.name ="Humming bird" //Overriding
+
+bird.canFly = function() {
+  console.log(this.name ," can definitely fly")
+}
+
+bird.canFly()
+bird.canWalk()
+
+
+
+//3. Functional Inheritence
+// Generally used for information hiding and having the private variables.
+//can also add super method in this cases... can refer the  parent methods.
+
+function Animal() {
+  let that ={}
+  let name ="Default Animal" // private
+  let age = 12; //private
+
+  that.canWalk = function () {
+      console.log(name, "can walk")
+  }
+
+  return that;
+
+}
+
+
+
+function Bird() {
+  let that = Animal();
+  let name ='Humming Bird'
+  that.canFly = function() {
+      console.log(name, "can fly")
+
+  }
+  return that;
+}
+
+let bird = Bird();
+bird.canFly()
+bird.canWalk()
+
+
+
